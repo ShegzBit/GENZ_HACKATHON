@@ -1,0 +1,36 @@
+sending a message to a chat completion model
+
+completion = openai.ChatCompletion.create(
+	model = "chat completion model name"
+	messages = [
+	{"role" : "system", "content" : "tell the chat bot the role to be played by chat bot for preferably teacher for this project"},
+	{"role" : "teacher", "content" : "A message you expect the bot to think it said to the student"},
+	{"role" : "student", "content" : "user prompt to chatbot"}
+]
+)
+
+When a message is sent to a chat completion model it returns this
+{
+  "id": "chatcmpl-123",
+  "object": "chat.completion",
+  "created": 1677652288,
+  "model": "gpt-3.5-turbo-0613",
+  "choices": [{
+    "index": 0,
+    "message": {
+      "role": "Teacher",
+      "content": "\n\nHello there, how may I assist you today?",
+    },
+    "finish_reason": "stop"
+  }],
+  "usage": {
+    "prompt_tokens": 9,
+    "completion_tokens": 12,
+    "total_tokens": 21
+  }
+}
+
+to retrive response
+response = dict(completion.choices[0].message)
+now response.content returns the expected response from the chatbot
+
